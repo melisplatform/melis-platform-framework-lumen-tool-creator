@@ -18,7 +18,6 @@ class CreateLumenModuleController extends Controller
 
     public function createModule()
     {
-        echo "went here";die;
         return $this->moduleService->createModule();
     }
 }
