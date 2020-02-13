@@ -1,11 +1,11 @@
 {
-    "name": "melisplatform/melis-platform-frameworks-lumen-tool-creator",
-    "description" : "Melis Platform Frameworks Lumen Tool Creator",
-    "homepage": "https://github.com/melisplatform/melis-platform-frameworks-lumen-tool-creator",
+    "name": "melisplatform/melis-platform-framework-lumen-tool-creator",
+    "description" : "Melis Platform Framework Lumen Tool Creator",
+    "homepage": "https://github.com/melisplatform/melis-platform-framework-lumen-tool-creator",
     "support": {
         "email": "contact@melistechnology.com",
-        "source": "https://github.com/melisplatform/melis-platform-frameworks-lumen-tool-creator",
-        "issues": "https://github.com/melisplatform/melis-platform-frameworks-lumen-tool-creator/issues"
+        "source": "https://github.com/melisplatform/melis-platform-framework-lumen-tool-creator",
+        "issues": "https://github.com/melisplatform/melis-platform-framework-lumen-tool-creator/issues"
     },
     "authors": [
         {
