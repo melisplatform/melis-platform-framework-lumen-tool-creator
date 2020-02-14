@@ -164,7 +164,8 @@ class IndexController extends BaseController
                 unset($propertiesParams['[primary_key]']);
                 // set log type code
                 $logTypeCode = ucwords('[module_name]') . "_UPDATE";
-                // update album
+                $propertiesParams = $this->removeEmptyFields($propertiesParams);
+                // update
                 $this->toolService->save($propertiesParams,$id);
                 // set message
                 $message = "tr_" . strtolower('[module_name]') ."_update_item_success";
@@ -292,6 +293,23 @@ class IndexController extends BaseController
 
         return $postParams;
     }
-
+    /**
+    *
+    * removed empty fields to avoid conflict in saving / updating data
+    *
+    * @param $paramsData
+    * @return mixed
+    */
+    private function removeEmptyFields($paramsData)
+    {
+        if (! empty($paramsData)) {
+            foreach ($paramsData as $field => $val) {
+                if (empty($paramsData[$field])) {
+                    unset($paramsData[$field]);
+                }
+            }
+        }
+        return $paramsData;
+    }
 
 }

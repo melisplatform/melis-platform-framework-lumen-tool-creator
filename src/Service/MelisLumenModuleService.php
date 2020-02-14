@@ -110,16 +110,23 @@ class MelisLumenModuleService
         // set tool creator session
         $this->toolCreatorSession = app('MelisToolCreatorSession')['melis-toolcreator'];
 
+        if (file_exists(__DIR__ . "/tmpTcSession")) {
+            $this->toolCreatorSession = unserialize(file_get_contents(__DIR__ . "/tmpTcSession"));
+        }
+
         if (! empty($this->toolCreatorSession)) {
+            //file_put_contents(__DIR__ . '/tmpTcSession',serialize($this->toolCreatorSession));
             // set module name
             $this->setModuleName($this->toolCreatorSession['step1']['tcf-name']);
-            // set model name
-            $this->setModelname(str_replace('_',null,ucwords($this->getTableName(),'_')) . "Table");
-            // set table primary key
-            $this->setTablePrimaryKey(DB::connection('melis')->select(DB::raw("SHOW KEYS FROM `" . $this->getTableName() . "` WHERE Key_name = 'PRIMARY'"))[0]->Column_name);
-            // set secondary primary key
-            if ($this->hasSecondaryTable()){
-                $this->secondaryTablePrimarykey = DB::connection('melis')->select(DB::raw("SHOW KEYS FROM `" . $this->getSecondaryTableName() . "` WHERE Key_name = 'PRIMARY'"))[0]->Column_name;
+            if (!$this->toolIsBlank()) {
+                // set model name
+                $this->setModelname(str_replace('_',null,ucwords($this->getTableName(),'_')) . "Table");
+                // set table primary key
+                $this->setTablePrimaryKey(DB::connection('melis')->select(DB::raw("SHOW KEYS FROM `" . $this->getTableName() . "` WHERE Key_name = 'PRIMARY'"))[0]->Column_name);
+                // set secondary primary key
+                if ($this->hasSecondaryTable()){
+                    $this->secondaryTablePrimarykey = DB::connection('melis')->select(DB::raw("SHOW KEYS FROM `" . $this->getSecondaryTableName() . "` WHERE Key_name = 'PRIMARY'"))[0]->Column_name;
+                }
             }
         } else {
 
@@ -315,6 +322,10 @@ class MelisLumenModuleService
      */
     public function createModule()
     {
+        if ($this->toolIsBlank() && $this->getToolCreatorSession()['step1']['tcf-tool-framework'] == "lumen") {
+            // craete blank tool
+            $this->createBlankTool();
+        }
         /*
          * return if the tool creator is not for framework and lumen
          */
@@ -344,11 +355,44 @@ class MelisLumenModuleService
         // proccess service
         $this->createServiceFile();
 
-        return [
-            "message" => 'Module ' . $this->getModuleName() . " created successfully"
-        ];
+        exit('Module ' . $this->getModuleName() . " created successfully");
     }
 
+    /**
+     * create blank tool
+     */
+    private function createBlankTool()
+    {
+        $this->createModuleDir();
+        // required folder
+        $foldersToCreate = [
+            'routes',
+            'Providers'
+        ];
+        // create folders
+        foreach ($foldersToCreate as $i => $val) {
+            // create directory
+            mkdir($this->getModuleDir() . DIRECTORY_SEPARATOR . $val, 0777);
+        }
+
+        // process routes
+        $this->createBlankRouteFile();
+        // process service provider
+        $this->createServiceProviderFile();
+        // create asset file
+        $publicDir =  __DIR__ . "/../../../../../module/" . ucfirst(strtolower($this->getModuleName())) . DIRECTORY_SEPARATOR  . "public";
+        if (!file_exists($publicDir)) {
+            mkdir($publicDir,0777);
+        }
+        $pathToCreate = __DIR__ . "/../../../../../module/" . ucfirst(strtolower($this->getModuleName())) . DIRECTORY_SEPARATOR  . "public" . DIRECTORY_SEPARATOR . "js";
+        if (!file_exists($pathToCreate)) {
+            mkdir($pathToCreate, 0777);
+        }
+        // create file
+        $this->createFile($pathToCreate  . DIRECTORY_SEPARATOR . "tool.js",null);
+
+        exit('Blank tool ' . $this->getModuleName() . "  was successfully created");
+    }
     /**
      * create the required directory for the module
      */
@@ -409,7 +453,16 @@ class MelisLumenModuleService
         $this->createFile($pathToCreate . DIRECTORY_SEPARATOR . "web.php",$data);
 
     }
-
+    private function createBlankRouteFile()
+    {
+        $pathToCreate = $this->getModuleDir() . DIRECTORY_SEPARATOR . "routes";
+        // get the template route
+        $templateRoutes = file_get_contents(__DIR__ . "/../../install/blankTool/routes/web.php");
+        // replace module_name in file
+        $data = "<?php \n" . str_replace('[module_name]',$this->getModuleName(),$templateRoutes);
+        // create a file
+        $this->createFile($pathToCreate . DIRECTORY_SEPARATOR . "web.php",$data);
+    }
     /**
      * create service provider lumen module
      */
@@ -421,7 +474,11 @@ class MelisLumenModuleService
             mkdir($pathToCreate,0777);
         }
         // get the template service provider
-        $templateServiceProvider = file_get_contents(self::TEMPLATE_SERVICE_PROVIDER);
+        $templateServiceProvider = self::TEMPLATE_SERVICE_PROVIDER;
+        if ($this->toolIsBlank()) {
+            $templateServiceProvider = __DIR__ . "/../../install/blankTool/providers/TemplateProvider.php";
+        }
+        $templateServiceProvider = file_get_contents($templateServiceProvider);
         // replace module_name in file
         $data =  "<?php \n" . str_replace('[module_name]',$this->getModuleName(),$templateServiceProvider);
         // create a file
@@ -699,9 +756,10 @@ class MelisLumenModuleService
 
     //                // save if no data
                 if (empty($dbData)) {
+                    unset($val[\'[secondary_table_pk]\']);
                     $success[] = DB::connection(\'melis\')->table(\'[second_table]\')->insert($val);
                 } else {
-                    unset($val[\'cnews_text_id\']);
+                    unset($val[\'[secondary_table_pk]\']);
                     // update if there is data
                     $success[] = DB::connection(\'melis\')->table(\'[second_table]\')
                         ->where(\'[secondary_table_pk]\',"=",$dbData->[secondary_table_pk])
@@ -1388,5 +1446,13 @@ class MelisLumenModuleService
     public function toolIsDb()
     {
         return ($this->getToolCreatorSession()['step1']['tct-tool-type'] == 'db') ? true : false ;
+    }
+    public function toolIsBlank()
+    {
+        if ($this->getToolCreatorSession()['step1']['tcf-tool-type'] == 'blank') {
+            return true;
+        }
+
+        return false;
     }
 }
