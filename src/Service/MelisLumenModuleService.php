@@ -109,13 +109,7 @@ class MelisLumenModuleService
     {
         // set tool creator session
         $this->toolCreatorSession = app('MelisToolCreatorSession')['melis-toolcreator'];
-
-        if (file_exists(__DIR__ . "/tmpTcSession")) {
-            $this->toolCreatorSession = unserialize(file_get_contents(__DIR__ . "/tmpTcSession"));
-        }
-
         if (! empty($this->toolCreatorSession)) {
-            //file_put_contents(__DIR__ . '/tmpTcSession',serialize($this->toolCreatorSession));
             // set module name
             $this->setModuleName($this->toolCreatorSession['step1']['tcf-name']);
             if (!$this->toolIsBlank()) {

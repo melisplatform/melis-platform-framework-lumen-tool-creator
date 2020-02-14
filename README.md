@@ -19,12 +19,12 @@ composer require melisplatform/melis-platform-framework-lumen
 
 ### Usage
 
-This module will automatically called via route /melis/lumen-module-create to create a lumen module
+This module will automatically called via route ``` /melis/lumen-module-create ``` to create a lumen module
 
 
 Addtional info :
 
-1. You can locate the created in module in /thirdparty/Lumen/module folder.
+1. You can locate the created module in ``` /thirdparty/Lumen/module ``` directory.
 
 ## Authors
 

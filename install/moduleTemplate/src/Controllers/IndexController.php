@@ -304,11 +304,12 @@ class IndexController extends BaseController
     {
         if (! empty($paramsData)) {
             foreach ($paramsData as $field => $val) {
-                if (empty($paramsData[$field])) {
+                if (is_null($paramsData[$field]) || strlen($paramsData[$field]) == 0) {
                     unset($paramsData[$field]);
                 }
             }
         }
+
         return $paramsData;
     }
 
