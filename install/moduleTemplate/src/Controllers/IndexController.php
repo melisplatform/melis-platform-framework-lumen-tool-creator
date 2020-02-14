@@ -171,6 +171,7 @@ class IndexController extends BaseController
                 $message = "tr_" . strtolower('[module_name]') ."_update_item_success";
             } else {
                 unset($propertiesParams['[primary_key]']);
+                $propertiesParams = $this->removeEmptyFields($propertiesParams);
                 // save date
                 $id = $this->toolService->save($propertiesParams)['id'];
                 // set message
@@ -226,9 +227,9 @@ class IndexController extends BaseController
         // success status
         $success = false;
         // default message
-        $message = "Unable to delete";
+        $message = "tr_" . strtolower('[module_name]') ."_delete_failed";
         // default title
-        $title = "tr_melis_lumen_notification_title";
+        $title = "tr_" . strtolower('[module_name]') ."_common_delete_item";
         // get all request parameters
         $requestParams = app('request')->request->all();
         // log type for melis logging system
@@ -245,7 +246,7 @@ class IndexController extends BaseController
         if ( $this->toolService->delete($id)) {
             $success = true;
             $icon = MelisCoreFlashMessengerService::INFO;
-            $message = "tr_melis_lumen_notification_message_delete_ok";
+            $message = "tr_" . strtolower('[module_name]') ."_delete_item_success";
         }
 
         // add to melis flash messenger
