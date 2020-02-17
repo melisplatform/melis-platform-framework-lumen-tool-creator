@@ -28,13 +28,13 @@ if ($id) {
         <ul class="tabs-label nav-tabs">
             <li class="active">
                 <a href="#{{ $smModuleName }}-tool-tab-{{ $itemId }}" class="glyphicons tag" data-toggle="tab" aria-expanded="true"><i></i>
-                    <span>Properties</span>
+                    <span>{{ __('[module_name]::messages.tr_' . $smModuleName . '_properties_tab_heading') }}</span>
                 </a>
             </li>
             @if ($toolHasLanguageTable)
                 <li>
                     <a href="#{{ $smModuleName }}-tool-lang-tab-{{ $itemId }}" class="glyphicons font" data-toggle="tab" aria-expanded="true"><i></i>
-                        <span>Languages</span>
+                        <span>{{ __('[module_name]::messages.tr_' . $smModuleName . '_texts_tab_heading') }}</span>
                     </a>
                 </li>
             @endif

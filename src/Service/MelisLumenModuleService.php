@@ -1067,8 +1067,7 @@ class MelisLumenModuleService
                     }
                 }
             }
-        }
-        $translations = array_merge_recursive($translations,$tmpTrans);
+        }$translations = array_merge_recursive($translations,$tmpTrans);
         // include melis common translations
         $translations = array_merge_recursive($translations,$this->getMelisCommonTranslations());
 
@@ -1200,8 +1199,8 @@ class MelisLumenModuleService
                     ],
                     'tooltip' => " . ($options['tooltip'] ?? null) . ",
                     'switch_options' => [
-                        'label-on' => 'Active',
-                        'label-off' => 'Inactive',
+                        'label-on' => __('" .  $this->getModuleName() . "::messages.tr" . strtolower($this->getModuleName()) . "_active'),
+                        'label-off' => __('" .  $this->getModuleName() . "::messages.tr" . strtolower($this->getModuleName()) . "_in_active'),
                         'icon' => \"glyphicon glyphicon-resize-horizontal\",
                     ],
                 ],
@@ -1353,6 +1352,8 @@ class MelisLumenModuleService
     }
 
     /**
+     * get table name of the primary table
+     *
      * @return mixed
      */
     public function getTableName()
@@ -1361,12 +1362,17 @@ class MelisLumenModuleService
     }
 
     /**
+     * common translations for the tool
+     *
      * @return array
      */
     public function getMelisCommonTranslations()
     {
         $moduleName = strtolower($this->getModuleName());
         $commonTranslations = [];
+        /*
+         * english translations
+         */
         $commonTranslations['en_EN'] = [
             'tr_' . $moduleName . '_common_add' => 'Add',
             'tr_' . $moduleName . '_common_edit' => 'Edit',
@@ -1386,12 +1392,21 @@ class MelisLumenModuleService
             'tr_' . $moduleName . '_not_int' => 'Numerical value only',
             'tr_' . $moduleName . '_empty_name_regex' => 'No special character(s) allowed',
             'tr_' . $moduleName . '_songs_not_int' => 'Numerical value only',
+            'tr_' . $moduleName . '_texts_tab_heading' => 'Texts',
+            'tr_' . $moduleName . '_texts_tab_heading_title' => 'Title',
+            'tr_' . $moduleName . '_texts_tab_heading_sub_title' => 'Subtitle',
+            'tr_' . $moduleName . '_active' => 'Active',
+            'tr_' . $moduleName . '_in_active' => 'Inactive',
+            'tr_' . $moduleName . '_properties_tab_heading' => 'Properties',
         ];
+        /*
+         * french translations
+         */
         $commonTranslations['fr_FR'] = [
             'tr_' . $moduleName . '_common_add' => 'Ajouter',
             'tr_' . $moduleName . '_common_edit' => 'Editer',
             'tr_' . $moduleName . '_common_delete' => 'Supprimer',
-            'tr_' . $moduleName . '_common_save' => 'Sauvegarder',
+            'tr_' . $moduleName . '_common_save' => 'Enregistrer',
             'tr_' . $moduleName . '_common_close' => 'Annuler',
             'tr_' . $moduleName . '_common_refresh' => 'Rafraichir',
             'tr_' . $moduleName . '_common_delete_item' => 'Supprimer l\'élément',
@@ -1405,6 +1420,12 @@ class MelisLumenModuleService
             'tr_' . $moduleName . '_empty' => 'Cette valeur ne doit pas être vide',
             'tr_' . $moduleName . '_empty_name_regex' => 'No special character(s) allowed',
             'tr_' . $moduleName . '_not_int' => 'Valeur numérique uniquement',
+            'tr_' . $moduleName . '_texts_tab_heading' => 'Textes',
+            'tr_' . $moduleName . '_texts_tab_heading_title' => 'Titre ',
+            'tr_' . $moduleName . '_texts_tab_heading_sub_title' => 'Sous-titre',
+            'tr_' . $moduleName . '_active' => 'Actif',
+            'tr_' . $moduleName . '_in_active' => 'Inactif',
+            'tr_' . $moduleName . '_properties_tab_heading' => 'Propriétés',
         ];
         // for other languages that are not yet created
         foreach ($this->getMelisLanguages() as $idx => $val) {
@@ -1412,6 +1433,7 @@ class MelisLumenModuleService
                 $commonTranslations[$val] = $commonTranslations['en_EN'];
             }
         }
+
         return $commonTranslations;
 
     }
@@ -1443,6 +1465,12 @@ class MelisLumenModuleService
     {
         return ($this->getToolCreatorSession()['step1']['tct-tool-type'] == 'db') ? true : false ;
     }
+
+    /**
+     * check if tool is blank
+     *
+     * @return bool
+     */
     public function toolIsBlank()
     {
         if ($this->getToolCreatorSession()['step1']['tcf-tool-type'] == 'blank') {
