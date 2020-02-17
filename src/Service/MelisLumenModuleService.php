@@ -1199,8 +1199,8 @@ class MelisLumenModuleService
                     ],
                     'tooltip' => " . ($options['tooltip'] ?? null) . ",
                     'switch_options' => [
-                        'label-on' => __('" .  $this->getModuleName() . "::messages.tr" . strtolower($this->getModuleName()) . "_active'),
-                        'label-off' => __('" .  $this->getModuleName() . "::messages.tr" . strtolower($this->getModuleName()) . "_in_active'),
+                        'label-on' => __('" .  $this->getModuleName() . "::messages.tr_" . strtolower($this->getModuleName()) . "_active'),
+                        'label-off' => __('" .  $this->getModuleName() . "::messages.tr_" . strtolower($this->getModuleName()) . "_in_active'),
                         'icon' => \"glyphicon glyphicon-resize-horizontal\",
                     ],
                 ],
