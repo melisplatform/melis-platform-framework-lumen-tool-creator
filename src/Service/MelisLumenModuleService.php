@@ -255,7 +255,7 @@ class MelisLumenModuleService
     {
 
         // get service provider file path
-        $serviceProviders = require __DIR__ . "/../../../../../thirdparty/Lumen/bootstrap/service.providers.php";
+        $serviceProviders = require $this->getServiceProvidersPath();
         // check if class exists
         if (class_exists($newClass)) {
             // add only when class is not yet listed
@@ -273,12 +273,12 @@ class MelisLumenModuleService
                 $string = "<?php \n" . $comments ."\n"  .
                     "return [\n" . $providers . "\n];";
                 // check if file is not writable then make MelisLumenModuleService it writable
-                if (!is_writable($serviceProviders)) {
-                    chmod($serviceProviders,0777);
+                if (!is_writable($this->getServiceProvidersPath())) {
+                    chmod($this->getServiceProvidersPath(),0777);
                 }
 
                 // update file contents
-                return $this->writeFile($serviceProviders,$string);
+                return $this->writeFile($this->getServiceProvidersPath(),$string);
             }
         }
         
