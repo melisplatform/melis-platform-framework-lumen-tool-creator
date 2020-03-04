@@ -22,7 +22,7 @@
     "autoload": {
         "psr-4": {
             "MelisPlatformFrameworkLumenToolCreator\\": "src/",
-            "LumenModule\\": "../../thirdparty/Lumen/module/"
+            "LumenModule\\": "../../../thirdparty/Lumen/module/"
         }
     }
 }
