@@ -16,7 +16,7 @@
         }
     ],
     "require" : {
-        "melisplatform/melis-tool-creator-lumen": "*",
+        "melisplatform/melis-tool-creator-lumen": "^3.2",
         "doctrine/dbal": "2.*"
     },
     "autoload": {
