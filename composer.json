@@ -1,11 +1,14 @@
 {
     "name": "melisplatform/melis-platform-framework-lumen-tool-creator",
+    "type": "melisplatform-module",
     "description" : "Melis Platform Framework Lumen Tool Creator",
+    "license": "OSL-3.0",
     "homepage": "https://github.com/melisplatform/melis-platform-framework-lumen-tool-creator",
     "support": {
         "email": "contact@melistechnology.com",
         "source": "https://github.com/melisplatform/melis-platform-framework-lumen-tool-creator",
-        "issues": "https://github.com/melisplatform/melis-platform-framework-lumen-tool-creator/issues"
+        "issues": "https://github.com/melisplatform/melis-platform-framework-lumen-tool-creator/issues",
+        "docs": "https://www.melistechnology.com/melistechnology/resources/download-documentation/id/17#documentation"
     },
     "authors": [
         {
@@ -15,6 +18,16 @@
             "role": "Developer"
         }
     ],
+    "keywords": [
+        "frameworks",
+        "melis",
+        "zf2",
+        "module"
+    ],
+    "extra": {
+        "melis-module": false,
+        "module-name": "MelisPlatformFrameworkLumenToolCreator"
+    },
     "require" : {
         "melisplatform/melis-tool-creator-lumen": "^3.2",
         "doctrine/dbal": "2.*"
