@@ -37,7 +37,7 @@ $toolHasLanguageTable = [tool_has_lang_table] ?? 0;
                         <ul class="nav-tabs product-text-tab">
                             @foreach($langs As $key => $lang)
                                 <li class="{{ ($key) ? '':'active' }}" style="margin-bottom: 6px;">
-                                    <a class="clearfix btn-block" data-toggle="tab" href="#{{ $smModuleName }}-text-translation-{{ $lang['lang_cms_locale'] }}" aria-expanded="false" >
+                                    <a class="clearfix btn-block" data-toggle="tab" href="#{{ $smModuleName }}-text-translation-{{ $lang['lang_cms_locale'] }}" aria-expanded="false" style="padding:0;border-radius:4px;">
                                         @php
                                             $langLabel = '<span>'. $lang['lang_cms_name'] .'</span>';
                                             $moduleSvc = app('ZendServiceManager')->get('ModulesService');
