@@ -57,8 +57,8 @@ if ($id) {
                 <div class="col-xs-12 col-md-3" id="language_form">
                     <ul class="nav-tabs product-text-tab">
                         @foreach($langs As $key => $lang)
-                            <li class="{{ ($key) ? '':'active' }}" style="margin-bottom: 6px;">
-                                <a class="clearfix btn-block" data-toggle="tab" href="#{{ $smModuleName }}-text-translation-{{ $lang['lang_cms_locale'] }}" aria-expanded="false"  style="padding:0;border-radius:4px;">
+                            <li class="{{ ($key) ? '':'active' }}" style="margin-bottom: 6px;border-radius:4px;background-color: #ecebeb">
+                                <a class="clearfix btn-block" data-toggle="tab" href="#{{ $smModuleName }}-text-translation-{{ $lang['lang_cms_locale'] }}" aria-expanded="false"  style="padding:0;border-radius:inherit;">
                                     @php
                                         $langLabel = '<span>'. $lang['lang_cms_name'] .'</span>';
                                         $moduleSvc = app('ZendServiceManager')->get('ModulesService');
