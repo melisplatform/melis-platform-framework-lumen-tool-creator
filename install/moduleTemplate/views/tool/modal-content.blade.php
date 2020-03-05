@@ -72,6 +72,6 @@ $toolHasLanguageTable = [tool_has_lang_table] ?? 0;
     </div>
 </div>
 <script>
-    $("#property_form .tip-info").parent().addClass('d-flex flex-row justify-content-between');
-    $("#language_form .tip-info").parent().addClass('d-flex flex-row justify-content-between');
+    $(".<?= $smModuleName ?>form .tip-info").parent().parent().addClass('d-flex flex-row justify-content-between');
+    $(".<?= $smModuleName ?>form .tip-info").parent().parent().addClass('d-flex flex-row justify-content-between');
 </script>
