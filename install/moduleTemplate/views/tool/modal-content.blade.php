@@ -36,8 +36,8 @@ $toolHasLanguageTable = [tool_has_lang_table] ?? 0;
                     <div class="col-xs-12 col-md-4">
                         <ul class="nav-tabs product-text-tab">
                             @foreach($langs As $key => $lang)
-                                <li class="{{ ($key) ? '':'active' }}" style="margin-bottom: 6px;">
-                                    <a class="clearfix btn-block" data-toggle="tab" href="#{{ $smModuleName }}-text-translation-{{ $lang['lang_cms_locale'] }}" aria-expanded="false" style="padding:0;border-radius:4px;">
+                                <li class="{{ ($key) ? '':'active' }}" style="margin-bottom: 6px;border-radius:4px;background-color: #ecebeb">
+                                    <a class="clearfix btn-block" data-toggle="tab" href="#{{ $smModuleName }}-text-translation-{{ $lang['lang_cms_locale'] }}" aria-expanded="false" style="padding:0;border-radius:inherit;">
                                         @php
                                             $langLabel = '<span>'. $lang['lang_cms_name'] .'</span>';
                                             $moduleSvc = app('ZendServiceManager')->get('ModulesService');
@@ -72,6 +72,6 @@ $toolHasLanguageTable = [tool_has_lang_table] ?? 0;
     </div>
 </div>
 <script>
-    $("#property_form .tip-info").parent().addClass('d-flex flex-row justify-content-between');
-    $("#language_form .tip-info").parent().addClass('d-flex flex-row justify-content-between');
+    $(".<?= $smModuleName ?>form .tip-info").parent().parent().addClass('d-flex flex-row justify-content-between');
+    $(".<?= $smModuleName ?>form .tip-info").parent().parent().addClass('d-flex flex-row justify-content-between');
 </script>
