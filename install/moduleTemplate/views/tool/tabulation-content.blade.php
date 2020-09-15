@@ -61,7 +61,7 @@ if ($id) {
                                 <a class="clearfix btn-block" data-toggle="tab" href="#{{ $smModuleName }}-text-translation-{{ $lang['lang_cms_locale'] }}" aria-expanded="false"  style="padding:0;border-radius:inherit;">
                                     @php
                                         $langLabel = '<span>'. $lang['lang_cms_name'] .'</span>';
-                                        $moduleSvc = app('ZendServiceManager')->get('ModulesService');
+                                        $moduleSvc = app('LaminasServiceManager')->get('ModulesService');
                                         if (file_exists($moduleSvc->getModulePath('MelisCms').'/public/images/lang-flags/'.$lang['lang_cms_locale'].'.png')){
                                             $langLabel .= '<span class="pull-right"><img src="/MelisCms/images/lang-flags/'.$lang['lang_cms_locale'].'.png"></span>';
                                         }
