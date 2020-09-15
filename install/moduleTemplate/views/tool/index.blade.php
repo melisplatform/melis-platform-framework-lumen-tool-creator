@@ -4,7 +4,7 @@ $lowerCase = strtolower($namespace);?>
 @include($namespace . "::tool/header")
 
 <div class="innerAll spacing-x2">
-    <[?]= app('ZendServiceManager')->get('ViewHelperManager')->get('melisdatatable')->createTable(config('[module_name]')['table_config']['table']) [?]>
+    <[?]= app('LaminasServiceManager')->get('ViewHelperManager')->get('MelisDataTable')->createTable(config('[module_name]')['table_config']['table']) [?]>
 </div>
 <!-- temp modal -->
 @include($namespace . "::tool/tmp-modal")

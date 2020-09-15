@@ -100,7 +100,7 @@ class IndexController extends BaseController
         if ($id) {
             $data = $this->toolService->getDataById($id)->toArray();
         }
-        $cmsLang = app('ZendServiceManager')->get('MelisEngineTableCmsLang');
+        $cmsLang = app('LaminasServiceManager')->get('MelisEngineTableCmsLang');
         return view("$this->viewNamespace::tool/modal-content",[
             'form' => $this->melisToolService->createDynamicForm(Config::get('[module_name]')['form_config'],$data),
             [lang_form]
@@ -279,7 +279,7 @@ class IndexController extends BaseController
         $postParams = [];
         if (!empty($requestparams)) {
             /** @var MelisCmsLangTable $cmsLang */
-            $cmsLang = app('ZendServiceManager')->get('MelisEngineTableCmsLang');
+            $cmsLang = app('LaminasServiceManager')->get('MelisEngineTableCmsLang');
             foreach ($requestparams as $i => $val) {
                 $postParams[$val['locale']] = [];
                 foreach ($val['formData'] as $ii => $val2) {
