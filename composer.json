@@ -30,8 +30,8 @@
     },
     "require" : {
         "melisplatform/melis-tool-creator" : "*",
-        "melisplatform/melis-tool-creator-lumen": "*",
-        "melisplatform/melis-platform-framework-lumen" : "*",
+        "melisplatform/melis-tool-creator-lumen": "dev-migrate/laminas as 4.0",
+        "melisplatform/melis-platform-framework-lumen" : "dev-migrate/laminas as 4.0",
         "doctrine/dbal": "2.*"
     },
     "autoload": {
