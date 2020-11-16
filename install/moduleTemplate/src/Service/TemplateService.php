@@ -203,7 +203,7 @@ class [template_service_name]
     public function getLanguageTableDataWithForm($field, $value)
     {
         // melis cms language table
-        $cmsLang = app('ZendServiceManager')->get('MelisEngineTableCmsLang');
+        $cmsLang = app('LaminasServiceManager')->get('MelisEngineTableCmsLang');
         $cmsLangData = $cmsLang->fetchAll()->toArray();
         $data = [];
         $tmpData = [];
@@ -241,7 +241,7 @@ class [template_service_name]
                 if ($data) {
                     $data = "<span class='fa fa-circle text-success'></span>";
                 } else {
-                    $data = "<span class='fa fa-circle text-success'></span>";
+                    $data = "<span class='fa fa-circle text-danger'></span>";
                 }
 
             break;
@@ -272,7 +272,7 @@ class [template_service_name]
     public function getAdminNameByUserId($userId)
     {
         $data = null;
-        $coreTable = app('ZendServiceManager')->get('MelisCoreTableUser')->getEntryById($userId)->current();
+        $coreTable = app('LaminasServiceManager')->get('MelisCoreTableUser')->getEntryById($userId)->current();
         if (! empty($coreTable)) {
             $data = $coreTable->usr_firstname . " " . $coreTable->usr_lastname;
         }
@@ -282,7 +282,7 @@ class [template_service_name]
     public function getLanguageByLangId($langId)
     {
         $data = null;
-        $langData = app('ZendServiceManager')->get('MelisEngineTableCmsLang')->getEntryById($langId)->current();
+        $langData = app('LaminasServiceManager')->get('MelisEngineTableCmsLang')->getEntryById($langId)->current();
         if (! empty($langData)) {
             $data = $langData->lang_cms_name;
         }
@@ -293,7 +293,7 @@ class [template_service_name]
     public function getTemplateNameByTplId($tplId)
     {
         $data = null;
-        $siteData = app('ZendServiceManager')->get('MelisEngineTableSite')->getEntryById($tplId)->current();
+        $siteData = app('LaminasServiceManager')->get('MelisEngineTableSite')->getEntryById($tplId)->current();
         if (! empty($siteData)) {
             $data = $siteData->site_label;
         }
@@ -303,7 +303,7 @@ class [template_service_name]
     public function getSiteNameBySiteId($siteId)
     {
         $data = null;
-        $tplData = app('ZendServiceManager')->get('MelisEngineTableSite')->getEntryById($siteId)->current();
+        $tplData = app('LaminasServiceManager')->get('MelisEngineTableSite')->getEntryById($siteId)->current();
         if (! empty($tplData)) {
             $data = $tplData->tpl_name;
         }
