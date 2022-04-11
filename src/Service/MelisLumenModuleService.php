@@ -808,7 +808,7 @@ class MelisLumenModuleService
      */
     private function getSecondaryTableName()
     {
-        return $this->getToolCreatorSession()['step3']['tcf-db-table-language-tbl'];
+        return $this->getToolCreatorSession()['step3']['tcf-db-table-language-tbl'] ?? null;
     }
 
     /**
