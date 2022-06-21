@@ -29,10 +29,10 @@
         "module-name": "MelisPlatformFrameworkLumenToolCreator"
     },
     "require" : {
-        "melisplatform/melis-tool-creator" : "^4.0",
-        "melisplatform/melis-tool-creator-lumen": "^4.0",
-        "melisplatform/melis-platform-framework-lumen" : "^4.0",
-        "doctrine/dbal": "2.*"
+        "melisplatform/melis-tool-creator" : "^5.0",
+        "melisplatform/melis-tool-creator-lumen": "^5.0",
+        "melisplatform/melis-platform-framework-lumen" : "^5.0",
+        "doctrine/dbal": "^3.3"
     },
     "autoload": {
         "psr-4": {
